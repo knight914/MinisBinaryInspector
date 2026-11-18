@@ -1,19 +1,11 @@
 #import <UIKit/UIKit.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 #import <objc/runtime.h>
-#import <errno.h>
 #import <fcntl.h>
-#import <stdlib.h>
 #import <sys/stat.h>
 #import <sys/mman.h>
 #import <unistd.h>
 #import "MachO.h"
-
-static ssize_t ReadBytes(int fd, void *buffer, size_t count) {
-    ssize_t n;
-    do { n = read(fd, buffer, count); } while (n < 0 && errno == EINTR);
-    return n;
-}
 
 static NSString *ReadMetadata(NSURL *url) {
     if (!url.isFileURL || !url.fileSystemRepresentation) return @"Expected a local file URL.";
