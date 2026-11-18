@@ -1,9 +1,9 @@
 Package: com.knight914.minisbinaryinspector
 Name: MinisBinaryInspector
-Version: 0.0.3
+Version: 0.0.4
 Architecture: iphoneos-arm64e
-Description: Read-only Mach-O metadata viewer for Minis.
+Description: Read-only Mach-O metadata viewer for OpenMinis 1.15 build 16.
 Maintainer: knight914
 Author: knight914
 Section: Tweaks
-Depends: firmware (>= 15.0), mobilesubstrate
+Depends: firmware (>= 16.0), mobilesubstrate

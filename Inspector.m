@@ -152,7 +152,15 @@ static void Attach(UIWindow *window) {
 
 __attribute__((constructor)) static void StartInspector(void) {
     @autoreleasepool {
-        if (![NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.aztut.app"]) return;
+        if (@available(iOS 16.0, *)) {
+            // Supported OS; continue with exact bundle metadata checks.
+        } else {
+            return;
+        }
+        NSBundle *bundle = NSBundle.mainBundle;
+        if (![bundle.bundleIdentifier isEqualToString:@"com.openminis.app"]) return;
+        if (![@"1.15" isEqual:[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]) return;
+        if (![@"16" isEqual:[bundle objectForInfoDictionaryKey:@"CFBundleVersion"]]) return;
         dispatch_async(dispatch_get_main_queue(), ^{
             [NSNotificationCenter.defaultCenter addObserverForName:UIWindowDidBecomeKeyNotification
                 object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *note) {
